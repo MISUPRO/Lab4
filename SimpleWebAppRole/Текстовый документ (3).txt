@@ -1,0 +1,47 @@
+-- Создание базы данных
+CREATE DATABASE users;
+USE users;
+
+-- Таблица пользователей с ролями
+CREATE TABLE users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL DEFAULT 'user'
+);
+
+
+-- Примерные данные
+INSERT INTO users (name, password, email, role) VALUES
+('JohnDoe', 'password123', 'johndoe@example.com', 'admin'),
+('JaneSmith', 'password456', 'janesmith@example.com', 'user'),
+('AliceBrown', 'password789', 'alicebrown@example.com', 'user');
+
+-- Таблица для администратора (например, список всех операций в системе)
+CREATE TABLE admin_table (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    action_name VARCHAR(255) NOT NULL,
+    action_time DATETIME NOT NULL,
+    performed_by VARCHAR(255) NOT NULL
+);
+
+-- Примерные данные для admin_table
+INSERT INTO admin_table (action_name, action_time, performed_by) VALUES
+('Created report', NOW(), 'JohnDoe'),
+('Deleted user', NOW(), 'JohnDoe');
+
+-- Таблица для обычных пользователей (например, список их заказов/действий)
+CREATE TABLE user_table (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255) NOT NULL,
+    description VARCHAR(255),
+    created_at DATETIME NOT NULL
+);
+
+-- Примерные данные для user_table
+INSERT INTO user_table (user_name, description, created_at) VALUES
+('JaneSmith', 'Requested report', NOW()),
+('AliceBrown', 'Updated profile', NOW());
+
+INSERT INTO users (name, password, email, role) VALUES ('Ellie', 'password789', 'Ellie@example.com', 'admin'); 
